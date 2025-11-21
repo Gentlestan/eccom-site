@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+/* Desktop nav links */
+
+/* Desktop nav links */
+.navLink {
+  @apply hover:underline transition;
+}
+
+.navMobile {
+  @apply block hover:underline text-lg transition;
+}
+
+.clip-half {
+  clip-path: inset(0 50% 0 0);
+}
