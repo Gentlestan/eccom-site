@@ -1,50 +1,19 @@
-"use client";
-
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+// pages/products/[id].tsx
+import { GetServerSideProps } from "next";
 import ProductDetail from "@/components/ProductDetails";
 import ProductReviews from "@/components/ProductReviews";
 import { Product, Review } from "@/lib/types";
 import { colors, ThemeKey } from "@/theme";
-import { useTheme } from "next-themes";
 import { fetchProduct, fetchReviews } from "@/lib/api";
 
-export default function ProductPage() {
-  const router = useRouter();
-  const { id } = router.query;
+interface ProductPageProps {
+  product: Product;
+  reviews: Review[];
+  themeKey: ThemeKey;
+}
 
-  const { resolvedTheme } = useTheme();
-  const themeKey: ThemeKey = resolvedTheme === "dark" ? "dark" : "light";
+export default function ProductPage({ product, reviews, themeKey }: ProductPageProps) {
   const themeColors = colors.product[themeKey];
-
-  const [product, setProduct] = useState<Product | null>(null);
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!id) return;
-
-    const loadData = async () => {
-      try {
-        const productData: Product = await fetchProduct(id as string);
-        setProduct(productData);
-
-        const reviewsData: Review[] = await fetchReviews(id as string);
-        setReviews(reviewsData);
-
-        setLoading(false);
-      } catch (error) {
-        console.error(error);
-        router.push("/products");
-      }
-    };
-
-    loadData();
-  }, [id, router]);
-
-  if (loading || !product) {
-    return <div className="text-center py-20">Loading...</div>;
-  }
 
   return (
     <>
@@ -53,3 +22,26 @@ export default function ProductPage() {
     </>
   );
 }
+
+// This runs on the server for every request
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const id = context.params?.id as string;
+
+  try {
+    const product: Product = await fetchProduct(id);
+    const reviews: Review[] = await fetchReviews(id);
+
+    return {
+      props: {
+        product,
+        reviews,
+        themeKey: "light", // default theme for SSR; you can adjust for dark mode later
+      },
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      notFound: true,
+    };
+  }
+};
