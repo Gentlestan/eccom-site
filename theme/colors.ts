@@ -30,7 +30,7 @@ export const colors: {
       navLink: "text-white hover:underline",
       icon: "text-white hover:text-gray-300",
       shadow: "shadow-lg",
-       link: "text-gray-100 hover:text-black",
+       link: "text-gray-100 hover:text-gray-500",
         buttonPrimary: "bg-blue-600 text-white hover:bg-blue-700",
         inputBg: "bg-white text-gray-900",
     },
@@ -40,7 +40,7 @@ export const colors: {
       navLink: "text-gray-900 hover:underline",
       icon: "text-gray-900 hover:text-gray-700",
       shadow: "shadow-lg",
-      link: "text-gray-900 hover:text-white",
+      link: "text-gray-900 hover:text-gray-400",
       buttonPrimary: "bg-blue-500 text-white hover:bg-blue-600",
      inputBg: "bg-gray-800 text-white", 
     

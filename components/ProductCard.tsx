@@ -27,7 +27,7 @@ export default function ProductCard({ product }: Props) {
       ${themeColors.cardBg} ${themeColors.border} 
       hover:shadow-xl hover:translate-y-2 hover:scale-[1.02]`}
     >
-      <Link href={`/product/${product.id}`}>
+      <Link href={`/products/${product.id}`}>
         <div className="w-full h-40 md:h-48 cursor-pointer">
           <img
             ref={imageRef}
@@ -52,6 +52,7 @@ export default function ProductCard({ product }: Props) {
           product={product}
           buttonClass={themeColors.addToCart}
           imageRef={imageRef}
+          fullWidth = {true}
         />
 
         <button

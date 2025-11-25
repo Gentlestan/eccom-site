@@ -33,8 +33,8 @@ export default function Footer() {
         <div className="flex flex-col gap-2">
           <h4 className="font-semibold">Shop</h4>
           <Link href="/products" className={themeColors.link}>All Products</Link>
-          <Link href="/categories" className={themeColors.link}>Categories</Link>
-          <Link href="/new-arrivals" className={themeColors.link}>New Arrivals</Link>
+          <Link href="#" className={themeColors.link}>Categories</Link>
+          <Link href="/" className={themeColors.link}>New Arrivals</Link>
           <Link href="/sale" className={themeColors.link}>Sale</Link>
         </div>
 

@@ -27,7 +27,8 @@ export default function NewArrival() {
   // Fetch full product list once
   useEffect(() => {
     async function loadProducts() {
-      const res = await fetch("/api/products");
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${baseUrl}/products`);
       const data = (await res.json()) as Product[];
 
       setProducts(data);
@@ -61,7 +62,7 @@ export default function NewArrival() {
 
   return (
     <section
-      className={`mt-10 px-6 md:px-10 max-w-7xl mx-auto ${themeColors.bg} ${themeColors.text}`}
+      className={`mt-10 px-6 mb-8 md:px-10 max-w-7xl mx-auto ${themeColors.bg} ${themeColors.text}`}
     >
       {/* TITLE */}
       <h2 className="text-2xl md:text-3xl font-bold mb-6">New Arrivals</h2>

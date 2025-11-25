@@ -3,6 +3,10 @@
 /* Desktop nav links */
 
 /* Desktop nav links */
+
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
 .navLink {
   @apply hover:underline transition;
 }

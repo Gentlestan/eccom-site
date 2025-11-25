@@ -11,7 +11,11 @@ export const products: Product[] = [
     rating: 4.8,
     staffRating: 4.9,
     stock: 35,
-    images: ["/assets/images/products/phone-s23ultra-1.jpg"],
+    images: ["/assets/images/products/phone-s23ultra-1.jpg",
+              "/assets/images/products/phone-s23ultra-1.jpg",
+              "/assets/images/products/phone-s23ultra-1.jpg"
+      
+     ],
     reviews: [],
   },
 

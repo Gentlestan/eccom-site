@@ -11,9 +11,10 @@ interface Props {
   //imageRef?: React.RefObject<HTMLImageElement>;
   imageRef?: React.RefObject<HTMLImageElement | null>;
  // optional for animation
+  fullWidth?: boolean; // 
 }
 
-export default function AddToCartButton({ product, buttonClass, imageRef }: Props) {
+export default function AddToCartButton({ product, buttonClass, imageRef, fullWidth }: Props) {
   const addToCart = useCartStore((s) => s.addToCart);
 
   function handleAddToCart() {
@@ -43,13 +44,30 @@ export default function AddToCartButton({ product, buttonClass, imageRef }: Prop
 
     document.body.appendChild(clone);
 
-    requestAnimationFrame(() => {
-      clone.style.left = cartRect.left + "px";
-      clone.style.top = cartRect.top + "px";
-      clone.style.width = "0px";
-      clone.style.height = "0px";
-      clone.style.opacity = "0.5";
-    });
+    // Calculate the movement
+const imgX = imgRect.left + window.scrollX + imgRect.width / 2;
+const imgY = imgRect.top + window.scrollY + imgRect.height / 2;
+const cartX = cartRect.left + window.scrollX + cartRect.width / 2;
+const cartY = cartRect.top + window.scrollY + cartRect.height / 2;
+
+const deltaX = cartX - imgX;
+const deltaY = cartY - imgY;
+
+// Set transition before starting the transform
+clone.style.transition = "transform 0.8s cubic-bezier(0.65, -0.1, 0.3, 1.5), opacity 0.8s";
+clone.style.transformOrigin = "center center";
+
+// Trigger the animation in the next frame
+requestAnimationFrame(() => {
+  clone.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0)`;
+  clone.style.opacity = "0.5";
+});
+
+// Remove the clone after transition ends
+clone.addEventListener("transitionend", () => clone.remove());
+
+
+    
 
     clone.addEventListener("transitionend", () => clone.remove());
   }
@@ -57,7 +75,7 @@ export default function AddToCartButton({ product, buttonClass, imageRef }: Prop
   return (
     <button
       onClick={handleAddToCart}
-      className={`flex-1 flex items-center justify-center gap-2 py-2 rounded-lg ${buttonClass}`}
+      className={`flex items-center justify-center gap-2 px-4 py-2 rounded-lg ${buttonClass} ${fullWidth ? "w-full" : "w-auto"}`}
     >
       <ShoppingCart className="w-4 h-4" />
       Add

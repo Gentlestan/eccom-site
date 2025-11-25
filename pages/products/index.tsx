@@ -14,7 +14,7 @@ import { filterAndSortProducts, SortOption } from "@/lib/productUtils";
 const PRODUCTS_PER_PAGE_DESKTOP = 12;
 const PRODUCTS_PER_PAGE_MOBILE = 6;
 
-export default function ProductsPage() {
+export default function ProductsIndexPage() {
   const { resolvedTheme } = useTheme();
   const themeKey: ThemeKey = resolvedTheme === "dark" ? "dark" : "light";
   const themeColors = colors.product[themeKey];
@@ -40,7 +40,9 @@ export default function ProductsPage() {
 
   useEffect(() => {
     async function loadProducts() {
-      const res = await fetch("/api/products");
+      const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+      const res = await fetch(`${baseUrl}/products`);
+      //const res = await fetch("/api/products");
       const data = (await res.json()) as Product[];
       setProducts(data);
       setFiltered(data); // initially show all
