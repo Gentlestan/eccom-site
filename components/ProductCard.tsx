@@ -1,6 +1,7 @@
 "use client";
 
 import { Heart } from "lucide-react";
+import { useWishlistStore } from "./store/Wishlist";
 import { Product } from "@/lib/types";
 import StarRating from "./StarRating";
 import Link from "next/link";
@@ -20,6 +21,8 @@ export default function ProductCard({ product }: Props) {
 
   // Needed for flying animation
   const imageRef = useRef<HTMLImageElement>(null);
+  const { toggle, isLiked } = useWishlistStore();
+  const liked = isLiked(product.id);
 
   return (
     <div
@@ -56,10 +59,15 @@ export default function ProductCard({ product }: Props) {
         />
 
         <button
-          className={`px-4 rounded-lg flex items-center justify-center ${themeColors.wishlist}`}
-        >
-          <Heart className="w-4 h-4" />
-        </button>
+  onClick={() => toggle(product.id)}
+  className={`px-4 rounded-lg flex items-center justify-center ${themeColors.wishlist}`}
+>
+        <Heart
+          className="w-4 h-4"
+          color={liked ? "red" : "currentColor"}
+          fill={liked ? "red" : "none"}
+        />
+      </button>
       </div>
     </div>
   );

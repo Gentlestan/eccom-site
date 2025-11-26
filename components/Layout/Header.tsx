@@ -7,17 +7,22 @@ import BarsIcon from "@/components/icons/Bars";
 import SearchIcon from "@/components/icons/SearchIcon";
 import ToggleButton from "@/components/icons/ToggleButton";
 import { useCartStore } from "../store/CartStore";
-import { Linkedin, ShoppingCart } from "lucide-react";
+import { ShoppingCart, Heart } from "lucide-react";
 import { colors, ThemeKey } from "@/theme";
+import { useWishlistStore } from "../store/Wishlist";
 
 export default function Header() {
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  //const cartRef = useRef<HTMLDivElement>(null);
+
   const cartRef = useRef<HTMLAnchorElement>(null);
 
+  // Cart Count
   const itemCount = useCartStore((s) => s.itemCount);
+
+  // Wishlist Count
+  const wishlistCount = useWishlistStore((s) => s.wishlist.length);
 
   useEffect(() => setMounted(true), []);
   if (!mounted) return null;
@@ -25,17 +30,20 @@ export default function Header() {
   const themeKey: ThemeKey = resolvedTheme === "dark" ? "dark" : "light";
   const themeColors = colors.header[themeKey];
 
-  // <-- compute link class so mobile menu links are readable on white bg
   const linkClass = menuOpen
     ? "text-gray-900 dark:text-white hover:underline"
     : themeColors.navLink;
 
   return (
-    <header className={`sticky top-0 z-40 transition-colors duration-300 ${themeColors.bg} ${themeColors.text} ${themeColors.shadow}`}>
+    <header
+      className={`sticky top-0 z-40 transition-colors duration-300 ${themeColors.bg} ${themeColors.text} ${themeColors.shadow}`}
+    >
       <div className="mx-auto max-w-6xl px-8">
         <div className="flex items-center justify-between py-5">
           {/* Logo */}
-          <Link href="/" className="text-xl font-semibold">Ecommerce</Link>
+          <Link href="/" className="text-xl font-semibold">
+            Ecommerce
+          </Link>
 
           {/* Desktop + Mobile Nav */}
           <nav
@@ -45,25 +53,34 @@ export default function Header() {
                 : "hidden md:flex"
             }`}
           >
-            {/* use computed linkClass so mobile menu links are readable */}
-            <Link href="/" className={linkClass}>Home</Link>
-            <Link href="/products" className={linkClass}>All products</Link>
-            <Link href="#" className={linkClass}>Categories</Link>
-            <Link href="#" className={linkClass}>Account</Link>
-             <Link href="/contact" className={linkClass}>Contact Us</Link>
+            <Link href="/" className={linkClass}>
+              Home
+            </Link>
+            <Link href="/products" className={linkClass}>
+              All products
+            </Link>
+            <Link href="#" className={linkClass}>
+              Categories
+            </Link>
+            <Link href="#" className={linkClass}>
+              Account
+            </Link>
+            <Link href="/contact" className={linkClass}>
+              Contact Us
+            </Link>
 
             {/* Cart */}
-           <Link
+            <Link
               href="/cart"
-              ref={cartRef}          // now correct type
+              ref={cartRef}
               id="cart-icon"
               className="relative flex items-center gap-1 cursor-pointer"
             >
               <ShoppingCart
                 className={`w-5 h-5 ${
                   menuOpen
-                    ? "text-gray-900 dark:text-white"  // exact colors for mobile menu open
-                    : themeColors.icon                 // exact theme color otherwise
+                    ? "text-gray-900 dark:text-white"
+                    : themeColors.icon
                 }`}
               />
               <span className="hidden md:inline">Cart</span>
@@ -74,14 +91,32 @@ export default function Header() {
                 </span>
               )}
             </Link>
-
           </nav>
 
           {/* Right Icons */}
           <div className="flex items-center gap-4">
+            {/* Search */}
             <Link href="/search" className={themeColors.navLink}>
               <SearchIcon className="w-5 h-5" />
             </Link>
+
+            {/* Wishlist */}
+            <Link href="/wishlist" className="relative">
+              <Heart
+                className={`w-5 h-5 ${
+                  menuOpen
+                    ? "text-gray-900 dark:text-white"
+                    : themeColors.icon
+                }`}
+              />
+              {wishlistCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                  {wishlistCount}
+                </span>
+              )}
+            </Link>
+
+            {/* Theme Toggle */}
             <ToggleButton />
 
             {/* Mobile Menu Button */}
