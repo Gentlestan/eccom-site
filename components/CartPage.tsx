@@ -46,14 +46,20 @@ export default function CartPage() {
                 <h2 className="font-semibold">{product.name}</h2>
                 <p className="text-gray-500">${product.price.toFixed(2)}</p>
               </div>
+              <div className="flex flex-col items-center gap-2 ml-auto md:flex-row md:items-center">
               <div className="flex items-center gap-2">
                 <button onClick={() => decreaseQty(product.id)} className="px-2 py-1 border rounded hover:bg-gray-100">-</button>
                 <span className="px-2">{qty}</span>
                 <button onClick={() => increaseQty(product.id)} className="px-2 py-1 border rounded hover:bg-gray-100">+</button>
               </div>
-              <button onClick={() => removeFromCart(product.id)} className="ml-4 p-2 hover:bg-red-100 rounded">
+
+              <button
+                onClick={() => removeFromCart(product.id)}
+                className="p-2 hover:bg-red-100 rounded"
+              >
                 <Trash2 className="w-5 h-5 text-red-500" />
               </button>
+            </div>
             </div>
           ))}
         </div>

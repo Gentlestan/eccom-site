@@ -65,14 +65,14 @@ export default function Hero() {
         <div className="flex justify-center md:justify-start gap-4">
           <a
             href={data.readMore.href}
-            className={`px-6 py-3 rounded-lg ${themeColors.buttonPrimary}`}
+            className={` px-4 py-2 md:px-6 md:py-3 rounded-lg ${themeColors.buttonPrimary}`}
           >
             {data.readMore.label}
           </a>
 
          <button
         onClick={() => console.log("Added:", data.addToCart.productId)}
-        className={`flex items-center gap-2 px-6 py-3 rounded-lg ${themeColors.buttonSecondary}`}
+        className={`flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 rounded-lg ${themeColors.buttonSecondary}`}
       >
         <ShoppingCart className="w-5 h-5" />
         {data.addToCart.label}
