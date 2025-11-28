@@ -89,13 +89,13 @@ Add your screenshots inside a folder named /screenshots
 Then replace the placeholder links below once uploaded.
 
 🏠 Homepage
-![Homepage](./screenshots/homepage.jpg
+![Homepage](./screenshots/homepage.jpg)
 
 📄 Product Details
 ![Product Details](./screenshots/productdetail.jpg)
 
 🛒 Cart
-![Cart](./screenshots/cart.jpg)
+![Cart](./screenshots/cartpage.jpg)
 
 🚀 How to Run the Project Locally
 
