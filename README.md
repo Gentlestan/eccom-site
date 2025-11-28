@@ -1,312 +1,134 @@
-ALX Project Nexus – ProDev Frontend Path
-🌍 Overview
+Project Nexus — Modern E-Commerce Frontend
 
-The ProDev Frontend Engineering Program is an advanced continuation of the ALX Frontend journey — designed to take developers from intermediate to professional-level frontend engineers.
-It emphasizes real-world development, modern frameworks, cross-platform applications, and collaboration with backend teams.
+Project Nexus is a modern, responsive e-commerce frontend built with Next.js, React, and Tailwind CSS, showcasing key shopping functionalities such as product browsing, cart management, and a refined user experience.
 
-This program blends theory and practice — combining structured lessons with hands-on projects that simulate production environments and professional workflows.
+This project was developed as part of the ALX Frontend Specialization and demonstrates industry-standard UI/UX patterns for online stores.
 
-🎯 Program Objectives
+🌟 Features
+🏠 Homepage
 
-Master modern frontend frameworks like React, Next.js, and React Native
+Hero banners
 
-Strengthen TypeScript, state management, and API integration skills
+Featured products
 
-Build responsive, accessible, and scalable interfaces
+Modern layout with responsive grid
 
-Implement real-world monitoring tools like Sentry
+🛍️ Product Listing
 
-Develop for web, mobile, and PWA platforms
+Clean, mobile-first grid layout
 
-Collaborate with backend learners to deliver full-stack solutions
+Product images, names, and pricing
 
-📚 Core Learnings
-🧩 Key Technologies
+Smooth hover effects
 
-HTML5 & Semantic Structure
+📄 Product Details Page
 
-CSS Grid and Flexbox
+High-quality product images
 
-Sass/SCSS – CSS Preprocessors for modular styling
+Product description
 
-JavaScript (ES6+) & TypeScript
+Price
 
-React & Next.js
+Add to Cart button
 
-Tailwind CSS
+🛒 Cart Functionality
 
-Redux & Context API
+Add items to cart
 
-GraphQL & REST API Integration
+Remove items from cart
 
-React Native – for mobile app development
+Update quantities
 
-Sentry – for real-time monitoring and error tracking
+Smooth “fly to cart” animation
 
-Progressive Web Apps (PWA) principles
+Cart drawer/display
 
-🗓️ Learning Journey
-Month 1 — Foundations and Styling
-Week 0 – Orientation
+Cart item persistence during navigation
 
-Introduced to the ProDev learning platform, tools, and structure
+👀 Search
 
-Set up local and remote environments
+Search bar
 
-Weeks 1–2 – Revisiting Styling & Exploring Sass
+Live product filtering
 
-Reviewed Semantic HTML, CSS Grid, and Flexbox for layout mastery.
-Then transitioned into Sass/SCSS, improving styling efficiency and maintainability.
+Query-based product results page
 
-Highlights:
+📱 Responsive Layout
 
-Variables, Nesting, and Mixins for DRY code
+Fully responsive for mobile, tablet & desktop
 
-Modular architecture for reusable design patterns
+Built with Tailwind CSS utilities
 
-Example:
+🧭 Navigation
 
-$primary-color: #3498db;
+Mobile menu
 
-.navbar {
-background: $primary-color;
-ul {
-list-style: none;
-padding: 0;
-li {
-display: inline-block;
-margin-right: 20px;
-}
-}
-}
+Cart icon
 
-Week 3 – TypeScript Fundamentals
+Clean and simple navigation structure
 
-Introduced TypeScript for type-safe, scalable development.
+📦 Checkout (UI Only)
 
-Key Learnings:
+Checkout screen layout (no backend yet)
 
-Interfaces, Enums, and Type Aliases
+Form for customer information (UI stage)
 
-Catching errors during compile time
+🛠️ Tech Stack
+Category Technology
+Framework Next.js
+Language TypeScript
+UI Library React
+Styling Tailwind CSS, ShadCN UI
+State Management Zustand
+Icons Lucide Icons
+Animations CSS & Framer Motion
 
-Improved code predictability and self-documentation
+📸 Screenshots
 
-interface Product {
-id: number;
-name: string;
-price: number;
-}
+Add your screenshots inside a folder named /screenshots
+Then replace the placeholder links below once uploaded.
 
-const displayProduct = (p: Product) => console.log(`${p.name}: $${p.price}`);
+🏠 Homepage
+![Homepage](./screenshots/homepage.jpg
 
-Next.js Introduction
+📄 Product Details
+![Product Details](./screenshots/productdetail.jpg)
 
-Setup with create-next-app
+🛒 Cart
+![Cart](./screenshots/cart.jpg)
 
-Explored Routing, Pages, and Layouts
+🚀 How to Run the Project Locally
 
-Discussed project structuring for scalability
+# Clone the repository
 
-Month 2 — Scaling with TypeScript, Next.js & APIs
-Week 5 – TypeScript in Action
+git clone https://github.com/your-username/your-repo.git
 
-Strengthened mastery through hands-on projects emphasizing interfaces, generics, and utility types.
+# Navigate into the project folder
 
-Takeaway:
-TypeScript isn’t just about safety — it enforces clarity, structure, and confidence across large codebases.
+cd project-nexus
 
-Week 6 – State Management in Next.js
+# Install dependencies
 
-Explored Context API and Redux Toolkit for managing complex global state.
+npm install
 
-Applied In:
-🛏️ Airbnb-Style Property Listing App
+# Start the development server
 
-Dynamic Routes (pages/property/[id].tsx)
+npm run dev
 
-Strongly Typed Components (interfaces/index.ts)
+🎯 Planned Improvements
 
-Modular UI and TailwindCSS integration
+These will be added in future iterations:
 
-Lesson Learned:
-Use Context API for simple apps and Redux for complex, multi-component state flows.
+Supabase backend integration
 
-Week 7 – API Consumption & Custom Hooks
+Authentication
 
-Focused on data fetching and management.
+Product database
 
-Learnings:
+Paystack payment gateway
 
-Fetching APIs using axios and fetch
+Admin dashboard for inventory
 
-Handling loading/error states
+🙌 Acknowledgements
 
-Custom hooks like useFetchData for clean, reusable logic
-
-🧠 Project Highlight – AI-Powered Image Generation App
-
-Generated images from text prompts
-
-Stored history locally
-
-Applied modular architecture and robust typing
-
-Advanced Modules
-⚙️ GraphQL Exploration
-
-Introduced to GraphQL for efficient data fetching:
-
-Replaced multiple REST endpoints with flexible queries
-
-Strongly typed queries using TypeScript
-
-Integrated GraphQL clients with Next.js
-
-📱 React Native for Mobile Development
-
-Learned to build cross-platform apps with React Native, bringing web concepts to mobile devices.
-
-Practical Examples:
-
-Login/Signup screens with React Native components
-
-Integrated API-based user authentication
-
-Built mini mobile apps to demonstrate proficiency
-
-Example:
-
-import { View, Text, TouchableOpacity } from "react-native";
-
-export default function Welcome() {
-return (
-<View>
-<Text>Welcome to My React Native App!</Text>
-<TouchableOpacity><Text>Get Started</Text></TouchableOpacity>
-</View>
-);
-}
-
-🩺 Sentry for Live Monitoring
-
-Integrated Sentry for real-time error tracking and performance monitoring:
-
-Captured exceptions and handled alerts
-
-Improved debugging and production reliability
-
-Learned proactive monitoring for deployed apps
-
-🏗️ Project Nexus – Final Capstone
-Building a Dynamic E-Commerce Product Catalog (Web, Mobile or PWA)
-
-A real-world e-commerce project designed to test and demonstrate professional-level frontend development skills.
-
-Overview
-
-Create a dynamic product catalog where users can browse, filter, and sort products — with responsive design, API integration, and mobile/PWA support.
-
-Goals
-
-Integrate and display data dynamically via APIs
-
-Implement filtering and sorting features
-
-Optimize performance using pagination or infinite scrolling
-
-Ensure accessibility and responsive design
-
-Technologies
-
-React / React Native
-
-Next.js
-
-Redux
-
-TypeScript
-
-Tailwind CSS
-
-Axios / GraphQL
-
-Key Features
-
-API Data Integration – Fetch, display, and manage product data dynamically
-
-Filtering & Sorting – Filter by category or price, and combine multiple filters
-
-Pagination & Infinite Scrolling – Load efficiently for large datasets
-
-Responsive Design – Works seamlessly on desktop, tablet, and mobile
-
-Git Commit Workflow
-Phase Example Commit Message
-Initial Setup feat: set up project structure with React and TypeScript
-Feature Development feat: implement product filtering and sorting
-UI Enhancements style: enhance UI with Tailwind CSS
-Bug Fixes fix: resolve filtering logic error
-Documentation docs: update README with setup and features
-Deployment
-
-Deploy on Vercel or Netlify
-
-Configure environment variables securely
-
-Integrate Sentry for monitoring
-
-Evaluation Criteria
-Area Expectation
-Functionality API integration, sorting, pagination all work correctly
-Code Quality Clean, modular, strongly typed
-UX/UI Smooth, responsive, accessible interface
-Version Control Clear, consistent commits and organized repo
-💪 Challenges & Solutions
-Challenge Solution
-Managing complex states Used Redux Toolkit for predictable state flow
-TypeScript learning curve Practiced through modular refactoring
-API integration bugs Used Axios interceptors and error handling hooks
-Styling inconsistencies Switched to Tailwind and SCSS modules
-Debugging production errors Implemented Sentry for live issue tracking
-🧭 Best Practices & Takeaways
-
-Type everything — interfaces, props, hooks, API responses
-
-Modularize code and components for reusability
-
-Monitor live apps with Sentry and error boundaries
-
-Secure credentials in .env.local
-
-Optimize for responsiveness and performance
-
-Collaborate actively with backend learners
-
-Document and commit frequently with clear messages
-
-🤝 Collaboration – The Key to Success
-Collaborate With:
-
-Frontend Peers: For UI consistency and shared learning
-
-Backend Developers: For API integration and full-stack synergy
-
-Where to Collaborate:
-
-💬 Discord Channel: #ProDevProjectNexus
-Connect, build teams, share progress, and exchange solutions.
-
-🚀 Final Reflection
-
-The ProDev Frontend Path has been a transformative journey — blending creativity, precision, and teamwork.
-From mastering Sass to building full-stack-ready apps with Next.js, TypeScript, React Native, and GraphQL, this program reshaped my understanding of modern frontend engineering.
-
-I’m culminating this experience with Project Nexus – a Dynamic E-Commerce Product Catalog, combining everything I’ve learned to create scalable, responsive, and intelligent interfaces for real-world users.
-
-“Do hard things — because that’s how you grow.” 💪
-
-🏷️ Tags
-
-#ALX_FE #ProDev #ProjectNexus #Nextjs #TypeScript #Redux #ReactNative
-#TailwindCSS #GraphQL #Sentry #FrontendEngineering #WebDevelopment #PWA #LearningJourney
+This project was built as part of the ALX Frontend Engineering Program, following best practices for modern e-commerce user interfaces.
