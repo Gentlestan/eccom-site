@@ -101,7 +101,7 @@ Then replace the placeholder links below once uploaded.
 
 # Clone the repository
 
-git clone https://github.com/your-username/your-repo.git
+git clone https://github.com/Gentlestan/eccom-site.git
 
 # Navigate into the project folder
 
