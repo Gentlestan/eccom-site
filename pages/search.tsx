@@ -37,7 +37,7 @@ export default function SearchPage() {
     setLoading(true);
 
     const queryString = Array.isArray(searchQuery) ? searchQuery[0] : searchQuery;
-
+    
     fetch(`/api/products?q=${encodeURIComponent(queryString)}`)
       .then((res) => res.json())
       .then((data: Product[]) => {

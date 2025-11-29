@@ -30,7 +30,7 @@ export default function ProductCard({ product }: Props) {
       ${themeColors.cardBg} ${themeColors.border} 
       hover:shadow-xl hover:translate-y-2 hover:scale-[1.02]`}
     >
-      <Link href={`/products/${product.id}`}>
+      <Link href={`/products/${product.slug}`}>
         <div className="w-full h-40 md:h-48 cursor-pointer">
           <img
             ref={imageRef}

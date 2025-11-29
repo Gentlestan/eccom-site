@@ -5,10 +5,12 @@ export interface HeroData {
   readMore: {
     label: string;
     href: string;
+    slug: string;
+   
   };
   addToCart: {
     label: string;
-    productId: string; // for future backend integration
+    slug: string; // for future backend integration
   };
   image: string;
 }
@@ -38,6 +40,7 @@ export interface Product {
   rating: number;      // average of user reviews (1 decimal)
   staffRating: number; // expert rating (1-5)
   stock: number;
+  slug: string;
   images: string[];    // multiple images for product gallery
   reviews: Review[];   // 3 reviews per product
 }

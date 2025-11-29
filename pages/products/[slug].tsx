@@ -1,10 +1,10 @@
-// pages/products/[id].tsx
+// pages/products/[slug].tsx
 import { GetServerSideProps } from "next";
 import ProductDetail from "@/components/ProductDetails";
 import ProductReviews from "@/components/ProductReviews";
 import { Product, Review } from "@/lib/types";
 import { colors, ThemeKey } from "@/theme";
-import { fetchProduct, fetchReviews } from "@/lib/api";
+import { fetchProductBySlug, fetchReviews } from "@/lib/api";
 
 interface ProductPageProps {
   product: Product;
@@ -23,25 +23,23 @@ export default function ProductPage({ product, reviews, themeKey }: ProductPageP
   );
 }
 
-// This runs on the server for every request
+// Server-side fetch
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const id = context.params?.id as string;
+  const slug = context.params?.slug as string;
 
   try {
-    const product: Product = await fetchProduct(id);
-    const reviews: Review[] = await fetchReviews(id);
+    const product = await fetchProductBySlug(slug);
+    const reviews = await fetchReviews(product.id); // use ID internally
 
     return {
       props: {
         product,
         reviews,
-        themeKey: "light", // default theme for SSR; you can adjust for dark mode later
+        themeKey: "light",
       },
     };
   } catch (error) {
     console.error(error);
-    return {
-      notFound: true,
-    };
+    return { notFound: true }; // product not found
   }
 };

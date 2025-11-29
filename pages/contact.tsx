@@ -2,6 +2,7 @@ import ContactForm from "@/components/ContactForm";
 import { useTheme } from "next-themes";
 import { colors, ThemeKey, ProductTheme } from "@/theme";
 
+
 export default function ContactPage() {
   const { resolvedTheme } = useTheme();
   const themeKey: ThemeKey = resolvedTheme === "dark" ? "dark" : "light";
