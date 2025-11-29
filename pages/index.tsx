@@ -6,9 +6,9 @@ import PromoCarousel from "@/components/PromoCarousal";
 export default function Home() {
   return (
    <div>
-    <PromoCarousel/>
      <Hero />
      <NewArrival />
+     <PromoCarousel/>
    </div>
   );
 }

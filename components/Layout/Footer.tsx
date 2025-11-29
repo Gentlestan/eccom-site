@@ -56,7 +56,7 @@ export default function Footer() {
           <h4 className="font-semibold">Subscribe to our newsletter</h4>
           <form className="flex">
             <input type="email" placeholder="Your email" className={`${themeColors.inputBg} p-2 rounded-l-md border border-gray-300 focus:outline-none flex-1`} />
-            <button type="submit" className={themeColors.buttonPrimary}>Subscribe</button>
+            <button type="submit" className={`${themeColors.buttonPrimary} p-2`}>Subscribe</button>
           </form>
 
           <div className="flex gap-4 mt-4">
