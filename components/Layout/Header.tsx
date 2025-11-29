@@ -105,8 +105,8 @@ export default function Header() {
               <Heart
                 className={`w-5 h-5 ${
                   menuOpen
-                    ? "text-gray-900 dark:text-white"
-                    : themeColors.icon
+                     ? themeColors.text      // ← use text color of header!
+                     : themeColors.icon
                 }`}
               />
               {wishlistCount > 0 && (
