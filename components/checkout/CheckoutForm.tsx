@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import { colors, ThemeKey } from "@/theme";
 
 interface CheckoutFormProps {
   totalPrice: number;
@@ -8,6 +10,10 @@ interface CheckoutFormProps {
 }
 
 export default function CheckoutForm({ totalPrice, items }: CheckoutFormProps) {
+  const { resolvedTheme } = useTheme();
+  const themeKey: ThemeKey = resolvedTheme === "dark" ? "dark" : "light";
+  const themeColors = colors.product[themeKey]; // use product theme colors
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -35,12 +41,7 @@ export default function CheckoutForm({ totalPrice, items }: CheckoutFormProps) {
   };
 
   const isFormValid =
-    form.name &&
-    form.email &&
-    form.phone &&
-    form.address &&
-    form.city &&
-    form.country;
+    form.name && form.email && form.phone && form.address && form.city && form.country;
 
   const handlePaystackPayment = () => {
     if (!isFormValid) return;
@@ -62,7 +63,7 @@ export default function CheckoutForm({ totalPrice, items }: CheckoutFormProps) {
           },
         ],
       },
-      callback: function (response: any) {
+      callback: function () {
         setLoading(false);
         setPaymentStatus("success");
       },
@@ -76,74 +77,44 @@ export default function CheckoutForm({ totalPrice, items }: CheckoutFormProps) {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div className={`grid grid-cols-1 md:grid-cols-12 gap-6 ${themeColors.bg} ${themeColors.text}`}>
       
       {/* LEFT — Billing Form */}
-      <div className="md:col-span-8 space-y-5 border rounded-xl p-6 bg-white">
+      <div className={`md:col-span-8 space-y-5 border rounded-xl p-6 ${themeColors.cardBg || themeColors.bg}`}>
         <h2 className="text-lg font-semibold mb-4">Billing Information</h2>
 
-        <input
-          name="name"
-          type="text"
-          placeholder="Full Name *"
-          required
-          value={form.name}
-          onChange={handleChange}
-          className="border p-3 rounded-lg w-full focus:ring-2 ring-blue-400"
-        />
-        <input
-          name="email"
-          type="email"
-          placeholder="Email Address *"
-          required
-          value={form.email}
-          onChange={handleChange}
-          className="border p-3 rounded-lg w-full focus:ring-2 ring-blue-400"
-        />
-        <input
-          name="phone"
-          type="text"
-          placeholder="Phone Number *"
-          required
-          value={form.phone}
-          onChange={handleChange}
-          className="border p-3 rounded-lg w-full focus:ring-2 ring-blue-400"
-        />
-        <input
-          name="address"
-          type="text"
-          placeholder="Shipping Address *"
-          required
-          value={form.address}
-          onChange={handleChange}
-          className="border p-3 rounded-lg w-full focus:ring-2 ring-blue-400"
-        />
+        {["name","email","phone","address"].map((field) => (
+          <input
+            key={field}
+            name={field}
+            type={field === "email" ? "email" : "text"}
+            placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)} *`}
+            required
+            value={(form as any)[field]}
+            onChange={handleChange}
+            className={`border p-3 rounded-lg w-full focus:ring-2 ring-blue-400 ${themeColors.text} ${themeColors.bg}`}
+          />
+        ))}
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input
-            name="city"
-            type="text"
-            placeholder="City *"
-            required
-            value={form.city}
-            onChange={handleChange}
-            className="border p-3 rounded-lg w-full focus:ring-2 ring-blue-400"
-          />
-          <input
-            name="country"
-            type="text"
-            placeholder="Country *"
-            required
-            value={form.country}
-            onChange={handleChange}
-            className="border p-3 rounded-lg w-full focus:ring-2 ring-blue-400"
-          />
+          {["city","country"].map((field) => (
+            <input
+              key={field}
+              name={field}
+              type="text"
+              placeholder={`${field.charAt(0).toUpperCase() + field.slice(1)} *`}
+              required
+              value={(form as any)[field]}
+              onChange={handleChange}
+              className={`border p-3 rounded-lg w-full focus:ring-2 ring-blue-400 ${themeColors.text} ${themeColors.bg}`}
+            />
+          ))}
         </div>
 
         <button
           onClick={handlePaystackPayment}
           disabled={!isFormValid || loading}
-          className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition disabled:bg-blue-300 disabled:cursor-not-allowed"
+          className={`w-full ${themeColors.addToCart} py-3 rounded-lg hover:scale-105 transition disabled:opacity-50 disabled:cursor-not-allowed`}
         >
           {loading ? "Processing Payment..." : "Pay Now"}
         </button>
@@ -162,7 +133,7 @@ export default function CheckoutForm({ totalPrice, items }: CheckoutFormProps) {
       </div>
 
       {/* RIGHT — Order Summary */}
-      <div className="md:col-span-4 p-4 border rounded-xl h-fit space-y-4 bg-white">
+      <div className={`md:col-span-4 p-4 border rounded-xl h-fit space-y-4 ${themeColors.cardBg || themeColors.bg}`}>
         <h2 className="text-lg font-semibold">Order Summary</h2>
 
         {items.map(({ product, qty }) => (
