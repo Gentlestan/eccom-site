@@ -9,12 +9,15 @@ import { colors, ThemeKey, ProductTheme } from "@/theme";
 
 interface Props {
   product: Product;
+  themeColors?: ProductTheme; // fixed typo
 }
 
-export default function ProductDetail({ product }: Props) {
+export default function ProductDetail({ product, themeColors }: Props) {
   const { resolvedTheme } = useTheme();
   const themeKey: ThemeKey = resolvedTheme === "dark" ? "dark" : "light";
-  const themeColors: ProductTheme = colors.product[themeKey];
+
+  // Use passed themeColors or fallback to default theme
+  const colorsToUse: ProductTheme = themeColors || colors.product[themeKey];
 
   const stockCount = Number(product.stock) || 0;
   const isOutOfStock = stockCount <= 0;
@@ -33,7 +36,7 @@ export default function ProductDetail({ product }: Props) {
   }).format(Number(product.price) || 0);
 
   return (
-    <div className={`max-w-6xl mx-auto px-4 py-8 ${themeColors.bg} ${themeColors.text}`}>
+    <div className={`max-w-6xl mx-auto px-4 py-8 ${colorsToUse.bg} ${colorsToUse.text}`}>
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         {/* LEFT - IMAGES */}
         <div className="md:col-span-6">
@@ -113,7 +116,7 @@ export default function ProductDetail({ product }: Props) {
           {/* Add to Cart */}
           <AddToCartButton
             product={product}
-            buttonClass={themeColors.addToCart}
+            buttonClass={colorsToUse.addToCart}
             imageRef={imageRef}
             fullWidth={false}
             disabled={isOutOfStock}
@@ -125,7 +128,7 @@ export default function ProductDetail({ product }: Props) {
       <div className="fixed bottom-0 left-0 right-0 md:hidden p-4 shadow-lg bg-white dark:bg-black">
         <AddToCartButton
           product={product}
-          buttonClass={themeColors.addToCart}
+          buttonClass={colorsToUse.addToCart}
           fullWidth
           disabled={isOutOfStock}
         />
