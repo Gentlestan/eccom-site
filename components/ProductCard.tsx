@@ -104,6 +104,7 @@ export default function ProductCard({ product }: Props) {
             buttonClass={themeColors.addToCart}
             imageRef={imageRef}
             fullWidth
+             disabled={(Number(product.stock) || 0) <= 0}
           />
         </motion.div>
 
