@@ -20,7 +20,7 @@
     "react-server-dom-turbopack": "^19.2.3",
     "react-server-dom-webpack": "^19.2.3",
     "swiper": "^12.0.3",
-    "zustand": "^5.0.8"
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.17",
