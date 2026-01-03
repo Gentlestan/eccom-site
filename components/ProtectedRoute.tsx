@@ -2,25 +2,35 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuthStore } from "./store/authstore";
+import { useAuthStore } from "@/components/store/authstore";
 
 interface Props {
   children: ReactNode;
+  redirectTo?: string; // optional redirect path, default /login
 }
 
-export default function ProtectedRoute({ children }: Props) {
+export default function ProtectedRoute({
+  children,
+  redirectTo = "/login",
+}: Props) {
   const router = useRouter();
   const { isAuthenticated } = useAuthStore();
   const [mounted, setMounted] = useState(false);
 
-  // Ensure client-side rendering
-  useEffect(() => setMounted(true), []);
+  // Ensure client-side rendering to prevent hydration issues
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-  if (!mounted) return null;
+  // Redirect if not authenticated (after mount)
+  useEffect(() => {
+    if (mounted && !isAuthenticated) {
+      router.replace(redirectTo);
+    }
+  }, [mounted, isAuthenticated, router, redirectTo]);
 
-  // Redirect if not authenticated
-  if (!isAuthenticated) {
-    router.push("/login"); // or any page you want guests to go
+  // Prevent flashing protected content before auth is ready
+  if (!mounted || !isAuthenticated) {
     return null;
   }
 

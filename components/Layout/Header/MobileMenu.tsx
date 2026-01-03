@@ -1,6 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { AuthUser } from "@/components/store/authstore";
-import ToggleButton from "@/components/icons/ToggleButton"; // import your toggle
+import ToggleButton from "@/components/icons/ToggleButton"; 
+import { useWishlistStore } from "@/components/store/Wishlist";
+import { useCartStore } from "@/components/store/CartStore";
+import { RefObject } from "react";
 
 interface MobileMenuProps {
   menuOpen: boolean;
@@ -10,9 +15,8 @@ interface MobileMenuProps {
   isDev: boolean;
   login: (args: { token: string; user: AuthUser }) => void;
   logout: () => void;
-  itemCount: number;
-  wishlistCount: number;
   themeColors: { navLink: string };
+  cartRef: RefObject<HTMLDivElement | null>; // <-- added
 }
 
 export default function MobileMenu({
@@ -23,10 +27,15 @@ export default function MobileMenu({
   isDev,
   login,
   logout,
-  itemCount,
-  wishlistCount,
   themeColors,
+  cartRef, // <-- receive cartRef
 }: MobileMenuProps) {
+  const { wishlist } = useWishlistStore();
+  const wishlistCount = wishlist.length;
+
+  const { items: cartItems } = useCartStore();
+  const cartCount = cartItems.reduce((acc, i) => acc + i.qty, 0);
+
   if (!menuOpen) return null;
 
   const handleDevLogin = () => {
@@ -49,11 +58,30 @@ export default function MobileMenu({
       <Link href="/contact" className={themeColors.navLink} onClick={() => setMenuOpen(false)}>
         Contact
       </Link>
-      <Link href="/wishlist" className={themeColors.navLink} onClick={() => setMenuOpen(false)}>
-        Wishlist ({wishlistCount})
+
+      {/* Cart */}
+      <Link
+        href={isAuthenticated ? "/cart" : "/login"}
+        className={themeColors.navLink}
+        onClick={() => setMenuOpen(false)}
+      >
+        <div ref={cartRef} className="relative"> {/* <-- use same ref */}
+          Cart ({cartCount})
+        </div>
       </Link>
 
-      {/* Auth Links */}
+      {/* Wishlist - auth only */}
+      {isAuthenticated && (
+        <Link
+          href="/wishlist"
+          className={themeColors.navLink}
+          onClick={() => setMenuOpen(false)}
+        >
+          Wishlist ({wishlistCount})
+        </Link>
+      )}
+
+      {/* Guest Links */}
       {!isAuthenticated ? (
         <>
           <Link href="/login" className={themeColors.navLink} onClick={() => setMenuOpen(false)}>
@@ -77,6 +105,7 @@ export default function MobileMenu({
         </>
       ) : (
         <>
+          {/* Authenticated Links */}
           <Link href="/account" className={themeColors.navLink} onClick={() => setMenuOpen(false)}>
             My Account
           </Link>
@@ -102,7 +131,6 @@ export default function MobileMenu({
 
       {/* Mobile Theme Toggle */}
       <div className="mt-2">
-        {/* Same ToggleButton as desktop */}
         <ToggleButton />
       </div>
     </div>

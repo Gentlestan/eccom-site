@@ -8,6 +8,7 @@ import ProductCard from "@/components/ProductCard";
 import ProductSkeleton from "@/components/skeletons/ProductSkeleton";
 //import { useWishlistStore } from "@/store/WishlistStore";
 import { useWishlistStore } from "@/components/store/Wishlist";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function WishlistPage() {
   const { resolvedTheme } = useTheme();
@@ -50,6 +51,7 @@ export default function WishlistPage() {
   const themeColors = colors.product[themeKey];
 
   return (
+    <ProtectedRoute>
     <section
       className={`mt-10 px-6 md:px-10 max-w-7xl mx-auto 
       ${themeColors.bg} ${themeColors.text}`}
@@ -81,5 +83,6 @@ export default function WishlistPage() {
         </div>
       )}
     </section>
+    </ProtectedRoute>
   );
 }
